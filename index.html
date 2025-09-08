@@ -40,7 +40,7 @@
           <i class="fa fa-times" id="menu-close"></i>
           <div class="container">
             <div class="image">
-              <a href="#"><img src="assets/images/author-image.jpg" alt="" /></a>
+              <a href="#"><img src="assets/images/jose.jpeg" alt="" /></a>
             </div>
             <div class="author-content">
               <h4>Jose Pino</h4>
@@ -51,7 +51,7 @@
                 <li><a href="#section1">Sobre mi.</a></li>
                 <li><a href="#section2">¿En qué soy bueno?</a></li>
                 <li><a href="#section3">Mis Trabajos</a></li>
-                <li><a href="#section4">Contact Me</a></li>
+                <li><a href="#section4">Contactate conmigo</a></li>
               </ul>
             </nav>
     <div class="social-network text-center">
@@ -272,32 +272,66 @@
         </div>
       </section>
 
-      <!-- ================= CONTACTO ================= -->
-      <section class="section contact-me" data-section="section4">
+    <!-- ================= CONTACTO ================= -->
+<section class="section contact-me" data-section="section4">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Contactate conmigo</h2>
+      <div class="line-dec"></div>
+      <span>Si quieres ponerte en contacto conmigo, completa el formulario.</span>
+    </div>
+    <div class="row">
+      <div class="right-content">
         <div class="container">
-          <div class="section-heading">
-            <h2>Contact Me</h2>
-            <div class="line-dec"></div>
-            <span>Si quieres ponerte en contacto conmigo, completa el formulario.</span>
-          </div>
-          <div class="row">
-            <div class="right-content">
-              <div class="container">
-                <form id="contact" action="" method="post">
-                  <div class="row">
-                    <div class="col-md-6"><input name="name" type="text" class="form-control" placeholder="Your name..." required /></div>
-                    <div class="col-md-6"><input name="email" type="email" class="form-control" placeholder="Your email..." required /></div>
-                    <div class="col-md-12"><input name="subject" type="text" class="form-control" placeholder="Subject..." required /></div>
-                    <div class="col-md-12"><textarea name="message" rows="6" class="form-control" placeholder="Your message..." required></textarea></div>
-                    <div class="col-md-12"><button type="submit" class="button">Send Message</button></div>
-                  </div>
-                </form>
+          <form id="contact" action="https://formspree.io/f/xldwaoea" method="POST">
+            <div class="row">
+              <div class="col-md-6">
+                <input name="name" type="text" class="form-control" placeholder="Tu nombre..." required />
+              </div>
+              <div class="col-md-6">
+                <input name="email" type="email" class="form-control" placeholder="Tu correo..." required />
+              </div>
+              <div class="col-md-12">
+                <input name="subject" type="text" class="form-control" placeholder="Asunto..." required />
+              </div>
+              <div class="col-md-12">
+                <textarea name="message" rows="6" class="form-control" placeholder="Escribe tu mensaje..." required></textarea>
+              </div>
+              <div class="col-md-12">
+                <button type="submit" class="button">Enviar Mensaje</button>
               </div>
             </div>
-          </div>
+          </form>
+
+          <!-- Mensaje de confirmación -->
+          <div id="form-status" style="margin-top:15px; font-weight:bold;"></div>
         </div>
-      </section>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- Script para mostrar mensaje de confirmación -->
+<script>
+  const form = document.getElementById("contact");
+  const status = document.getElementById("form-status");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (response.ok) {
+      status.innerHTML = "✅ ¡Tu mensaje ha sido enviado con éxito!";
+      form.reset();
+    } else {
+      status.innerHTML = "❌ Ocurrió un error, inténtalo de nuevo.";
+    }
+  });
+</script>
 
     <!-- Scripts -->
     <script src="vendor/jquery/jquery.min.js"></script>
