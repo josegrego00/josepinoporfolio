@@ -271,8 +271,7 @@
           </div>
         </div>
       </section>
-
-    <!-- ================= CONTACTO ================= -->
+<!-- ================= CONTACTO ================= -->
 <section class="section contact-me" data-section="section4">
   <div class="container">
     <div class="section-heading">
@@ -284,38 +283,49 @@
       <div class="right-content">
         <div class="container">
           <form id="contact" action="https://formspree.io/f/xldwaoea" method="POST">
-  <div class="row">
-    <div class="col-md-6">
-      <input name="name" type="text" class="form-control" placeholder="Tu nombre..." required />
-    </div>
-    <div class="col-md-6">
-      <input name="email" type="email" class="form-control" placeholder="Tu correo..." required />
-    </div>
-    <div class="col-md-12">
-      <input name="subject" type="text" class="form-control" placeholder="Asunto..." required />
-    </div>
-    <div class="col-md-12">
-      <textarea name="message" rows="6" class="form-control" placeholder="Escribe tu mensaje..." required></textarea>
-    </div>
-    <div class="col-md-12">
-      <button type="submit" class="button">Enviar Mensaje</button>
-    </div>
-  </div>
-</form>
-
-
-          <!-- Mensaje de confirmación -->
-          <div id="form-status" style="margin-top:15px; font-weight:bold;"></div>
+            <div class="row">
+              <div class="col-md-6">
+                <input name="name" type="text" class="form-control" placeholder="Tu nombre..." required />
+              </div>
+              <div class="col-md-6">
+                <input name="email" type="email" class="form-control" placeholder="Tu correo..." required />
+              </div>
+              <div class="col-md-12">
+                <input name="subject" type="text" class="form-control" placeholder="Asunto..." required />
+              </div>
+              <div class="col-md-12">
+                <textarea name="message" rows="6" class="form-control" placeholder="Escribe tu mensaje..." required></textarea>
+              </div>
+              <div class="col-md-12">
+                <button type="submit" class="button">Enviar Mensaje</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Script para mostrar mensaje de confirmación -->
+<!-- ================= MODAL BOOTSTRAP ================= -->
+<div class="modal fade" id="formModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4">
+      <h5 class="modal-title" id="formModalTitle"></h5>
+      <div class="modal-body" id="formModalMessage"></div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script -->
 <script>
   const form = document.getElementById("contact");
-  const status = document.getElementById("form-status");
+  const modal = new bootstrap.Modal(document.getElementById("formModal"));
+  const modalTitle = document.getElementById("formModalTitle");
+  const modalMessage = document.getElementById("formModalMessage");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -325,11 +335,16 @@
       body: data,
       headers: { 'Accept': 'application/json' }
     });
+
     if (response.ok) {
-      status.innerHTML = "✅ ¡Tu mensaje ha sido enviado con éxito!";
+      modalTitle.textContent = "✅ ¡Mensaje Enviado!";
+      modalMessage.textContent = "Gracias por contactarme, te responderé pronto.";
+      modal.show();
       form.reset();
     } else {
-      status.innerHTML = "❌ Ocurrió un error, inténtalo de nuevo.";
+      modalTitle.textContent = "❌ Error al enviar";
+      modalMessage.textContent = "Hubo un problema, inténtalo nuevamente.";
+      modal.show();
     }
   });
 </script>
