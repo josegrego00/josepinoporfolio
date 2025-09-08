@@ -7,7 +7,7 @@
     <meta name="author" content="" />
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
 
     <title>Porfolio JosepinoDev.</title>
 
@@ -302,31 +302,19 @@
               </div>
             </div>
           </form>
+
+          <!-- Mensaje de confirmación -->
+          <div id="form-status" style="margin-top:15px; font-weight:bold;"></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= MODAL BOOTSTRAP ================= -->
-<div class="modal fade" id="formModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center p-4">
-      <h5 class="modal-title" id="formModalTitle"></h5>
-      <div class="modal-body" id="formModalMessage"></div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Script -->
+<!-- Script para mostrar mensaje de confirmación -->
 <script>
   const form = document.getElementById("contact");
-  const modal = new bootstrap.Modal(document.getElementById("formModal"));
-  const modalTitle = document.getElementById("formModalTitle");
-  const modalMessage = document.getElementById("formModalMessage");
+  const status = document.getElementById("form-status");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -336,16 +324,11 @@
       body: data,
       headers: { 'Accept': 'application/json' }
     });
-
     if (response.ok) {
-      modalTitle.textContent = "✅ ¡Mensaje Enviado!";
-      modalMessage.textContent = "Gracias por contactarme, te responderé pronto.";
-      modal.show();
+      status.innerHTML = "✅ ¡Tu mensaje ha sido enviado con éxito!";
       form.reset();
     } else {
-      modalTitle.textContent = "❌ Error al enviar";
-      modalMessage.textContent = "Hubo un problema, inténtalo nuevamente.";
-      modal.show();
+      status.innerHTML = "❌ Ocurrió un error, inténtalo de nuevo.";
     }
   });
 </script>
@@ -403,6 +386,6 @@
         }
       });
     </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+
 </body>
 </html>
